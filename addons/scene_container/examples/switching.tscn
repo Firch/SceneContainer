@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cghcyfquin56p"]
+
+[ext_resource type="Script" uid="uid://bbi81u55pmi85" path="res://addons/scene_container/examples/switching.gd" id="1_akjej"]
+[ext_resource type="Script" uid="uid://blhtmeuo5dqnc" path="res://addons/scene_container/scenes/scene_container.gd" id="1_vhjue"]
+[ext_resource type="PackedScene" uid="uid://kql4k3aqikmd" path="res://addons/scene_container/examples/fade_transition.tscn" id="3_u544b"]
+
+[node name="Switching" type="Node"]
+script = ExtResource("1_akjej")
+
+[node name="SceneContainer" type="SubViewportContainer" parent="." node_paths=PackedStringArray("main_node", "transition")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vhjue")
+main_node = NodePath("SubViewport/Scene")
+transition = NodePath("SubViewport/FadeTransition")
+metadata/_custom_type_script = "uid://blhtmeuo5dqnc"
+
+[node name="SubViewport" type="SubViewport" parent="SceneContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="FadeTransition" parent="SceneContainer/SubViewport" instance=ExtResource("3_u544b")]
+
+[node name="Scene" type="Node" parent="SceneContainer/SubViewport"]
+
+[node name="ColorRect" type="ColorRect" parent="SceneContainer/SubViewport/Scene"]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.258673, 0.18699887, 0.32112503, 1)
+
+[node name="Label" type="Label" parent="SceneContainer/SubViewport/Scene"]
+offset_right = 385.0
+offset_bottom = 240.0
+text = "Press Enter (\"ui_accept\") to switch scene"

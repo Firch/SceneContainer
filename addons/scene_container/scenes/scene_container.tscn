@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj2qc5ayer61n"]
+
+[ext_resource type="Script" uid="uid://blhtmeuo5dqnc" path="res://addons/realms/scenes/scene_container.gd" id="1_kyrkd"]
+
+[node name="SceneContainer" type="SubViewportContainer"]
+script = ExtResource("1_kyrkd")

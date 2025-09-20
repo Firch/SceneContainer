@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6kp7ahjp1gto"]
+
+[ext_resource type="Script" uid="uid://75mrqcovjgyr" path="res://addons/realms/scenes/transition.gd" id="1_mpbus"]
+
+[node name="Transition" type="Node"]
+script = ExtResource("1_mpbus")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://6saipaosg07p"]
+
+[ext_resource type="Texture2D" uid="uid://ciujntbr78aob" path="res://addons/scene_container/examples/bigfile.png" id="1_5v172"]
+[ext_resource type="Texture2D" uid="uid://cs76jd3kp5j01" path="res://addons/scene_container/examples/bigfile_again.png" id="2_7m7ok"]
+
+[node name="BigScene" type="Node"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 19200.0
+offset_bottom = 10800.0
+texture = ExtResource("1_5v172")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+offset_right = 19200.0
+offset_bottom = 10800.0
+texture = ExtResource("2_7m7ok")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.40671527, 0.18434912, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 385.0
+offset_bottom = 240.0
+text = "This scene has a couple of big images, so it takes a while to load."

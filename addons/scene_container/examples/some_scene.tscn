@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://lo6uhjkkeqnl"]
+
+[node name="SomeScene" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(2.4065375e-08, 0.30225962, 0.2538879, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 385.0
+offset_bottom = 240.0
+text = "This is some other scene."
