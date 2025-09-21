@@ -14,4 +14,6 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
-icon.png.import
+images/icon.png.import
+images/transition.png.import
+images/scene_container.png.import
