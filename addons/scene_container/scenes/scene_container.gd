@@ -3,7 +3,7 @@
 extends SubViewportContainer
 class_name SceneContainer
 
-## Root node of the loaded scene. It is removed and replaced by a new one when the scenes are swithed.
+## Root node of the loaded scene. It is removed and replaced by a new one when the scenes are switched.
 @export var main_node: Node
 
 ## Current transition.
