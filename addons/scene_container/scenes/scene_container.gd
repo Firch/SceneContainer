@@ -12,32 +12,35 @@ class_name SceneContainer
 var _subviewport: SubViewport
 
 ## Loads and then sets the scene of this [SceneContainer].[br][br]
-## When [code]instant[/code] is true, causes the scene to load without async (might cause lag spike depending on the size and complexity of the scene).
-func request_scene(path: String, instant: bool = false) -> void:
+## If [code]scene[/code] is a [String], scene will be asynchronously loaded from the file path or UID. Loading can take some time depending on the size and complexity of the scene.[br]
+## If [code]scene[/code] is a [PackedScene], scene won't take any time to load.[br][br]
+## During the loading process, this function will notify assigned [Transition] of this [SceneContainer] for each phase. See [Transition] for more details.[br][br]
+## [i]Function's parameter only accepts [String] or [PackedScene] as the valid types. Godot currently doesn't support function overloading.[/i]
+func request_scene(scene: Variant) -> void:
 	var next_scene: PackedScene
 	
-	assert(ResourceLoader.exists(path), "Invalid scene path: " + path)
+	assert((scene is String or scene is PackedScene), "Invalid scene type: " + type_string(typeof(scene)) + " (Requested scene must be String or PackedScene)")
+	assert((scene is String and ResourceLoader.exists(scene)), "Invalid scene path or UID: " + scene)
 	
 	if transition:
 		await transition._on_load_start(self)
 	
-	match instant:
-		false:
-			ResourceLoader.load_threaded_request(path)
-			
-			var progress_ratio: Array
-			
-			while !(ResourceLoader.load_threaded_get_status(path, progress_ratio) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
-				if transition:
-					transition._on_progress_update(progress_ratio[0])
-				await get_tree().process_frame
-			
+	if scene is String:
+		ResourceLoader.load_threaded_request(scene)
+		
+		var progress_ratio: Array
+		
+		while !(ResourceLoader.load_threaded_get_status(scene, progress_ratio) == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED):
 			if transition:
-					transition._on_progress_update(progress_ratio[0])
-			
-			next_scene = ResourceLoader.load_threaded_get(path)
-		true:
-			next_scene = load(path)
+				transition._on_progress_update(progress_ratio[0])
+			await get_tree().process_frame
+		
+		if transition:
+				transition._on_progress_update(progress_ratio[0])
+		
+		next_scene = ResourceLoader.load_threaded_get(scene)
+	elif scene is PackedScene:
+		next_scene = scene
 	
 	if transition:
 		await transition._on_load_end(self)

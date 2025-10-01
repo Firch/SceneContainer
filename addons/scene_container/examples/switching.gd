@@ -10,5 +10,7 @@ func _process(delta):
 		
 		# Alternatively, you can load using UID:
 		#scene_container.request_scene("uid://lo6uhjkkeqnl")
+		# You can use already-loaded scenes (PackedScene) too:
+		#scene_container.request_scene(some_packed_scene)
 		
 		switched = true
