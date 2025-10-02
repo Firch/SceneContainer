@@ -20,7 +20,8 @@ func request_scene(scene: Variant) -> void:
 	var next_scene: PackedScene
 	
 	assert((scene is String or scene is PackedScene), "Invalid scene type: " + type_string(typeof(scene)) + " (Requested scene must be String or PackedScene)")
-	assert((scene is String and ResourceLoader.exists(scene)), "Invalid scene path or UID: " + scene)
+	if scene is String:
+		assert(ResourceLoader.exists(scene), "Invalid scene path or UID: " + scene)
 	
 	if transition:
 		await transition._on_load_start(self)
